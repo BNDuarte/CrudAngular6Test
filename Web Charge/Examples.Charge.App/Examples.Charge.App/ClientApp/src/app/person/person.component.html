@@ -1,0 +1,61 @@
+<form [formGroup]="personForm" (ngSubmit)="savePerson(personForm.value)" novalidate>
+  <input type="hidden" name="Id" formControlName="Id" id="Id" />
+
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label class="control-label">Name</label>
+      <input type="text" name="Name" class="form-control" formControlName="Name" id="Name">
+      <div  class="text text-danger" *ngIf="Name.errors.required">
+        Name is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label class="control-label">Local phone</label>
+      <input type="text" name="Localphone" class="form-control" formControlName="Localphone" id="Localphone">
+      <div  class="text text-danger" *ngIf="Localphone.errors.required">
+        Local phone is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label class="control-label">Cellphone</label>
+      <input type="text" name="Cellphone" class="form-control" formControlName="Cellphone" id="Cellphone">
+      <div  class="text text-danger" *ngIf="Cellphone.errors.required">
+        Cellphone is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-4">
+        <input type="submit" class="btn btn-primary" [disabled]="personForm.invalid"/>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of data">
+      <th scope="row">{{el.id}}</th>
+      <td>{{el.name}}</td>
+      <td>{{el.localphone}}</td>
+      <td>{{el.cellphone}}</td>
+      <td>
+        <button id="edit" class="btn btn-secondary" (click)="editPerson(el.id)">Edit</button>
+        <button id="remove" class="btn btn-danger" (click)="deletePerson(el.id)">delete</button>
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<!-- <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table> -->
+
+
